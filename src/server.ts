@@ -1,6 +1,7 @@
 import * as Config from "../config.json";
 import CommandHandler from "./commandHandler";
 import Discord from "discord.js";
+
 const bot = new Discord.Client();
 
 const commandHandler = new CommandHandler(Config.prefix);
