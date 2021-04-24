@@ -1,9 +1,12 @@
+import { Message, TextChannel } from "discord.js";
+
 class CommandHandler {
-  constructor(prefix) {
+  private prefix: string;
+  constructor(prefix: string) {
     this.prefix = prefix;
   }
 
-  async handleMessage(message) {
+  async handleMessage(message: Message) {
     if (!this.isCommand(message.content)) {
       console.log("Not a command");
       return;
@@ -26,7 +29,8 @@ class CommandHandler {
         if (args[0]) {
           num = parseInt(args[0]) + 1;
         }
-        message.channel.bulkDelete(num);
+        const channel = <TextChannel>message.channel;
+        channel.bulkDelete(num);
         message.channel.send(`deleted  ${num - 1} posts for you`);
         break;
       default:
@@ -34,9 +38,9 @@ class CommandHandler {
     }
   }
 
-  isCommand(message) {
+  isCommand(message: string) {
     return message.startsWith(this.prefix);
   }
 }
 
-module.exports = CommandHandler;
+export default CommandHandler;
