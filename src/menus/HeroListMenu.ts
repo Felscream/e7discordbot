@@ -16,13 +16,15 @@ class HeroListMenu {
 
   async start() {
     const pages = await this.generatePages();
-    this.menu = new Menu(
-      this.channel,
-      this.author,
-      pages,
-      config.menuReactionWaitTime
-    );
-    this.menu.start();
+    if (pages.length > 0) {
+      this.menu = new Menu(
+        this.channel,
+        this.author,
+        pages,
+        config.menuReactionWaitTime
+      );
+      this.menu.start();
+    }
   }
 
   private static async getSortedHeroes(): Promise<HeroPreview[]> {
@@ -35,7 +37,12 @@ class HeroListMenu {
   }
 
   private async generatePages(): Promise<any[]> {
-    const sortedHeroes = await HeroListMenu.getSortedHeroes();
+    let sortedHeroes: HeroPreview[] = [];
+    try {
+      sortedHeroes = await HeroListMenu.getSortedHeroes();
+    } catch (e) {
+      return [];
+    }
     const pagesNb = Math.ceil(sortedHeroes.length / config.heroesPerPage);
     let pages: any[] = [];
     for (let i = 0; i < pagesNb; i++) {
@@ -67,7 +74,8 @@ class HeroListMenu {
   }
 
   private static generatePageContent(heroes: HeroPreview[]): string {
-    const description = heroes
+    let description = "**";
+    description += heroes
       .map((hero) => {
         let display = hero.name;
         display += "            ";
@@ -78,7 +86,7 @@ class HeroListMenu {
       })
       .join("\n");
 
-    return description;
+    return description + "**";
   }
 
   private static sortAlphabetically(a: HeroPreview, b: HeroPreview): number {

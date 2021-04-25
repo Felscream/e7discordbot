@@ -1,38 +1,53 @@
 import HeroListCache from "./HeroListCache";
-import { getHeroes } from "../Epicsevendb";
+import { getHeroes, getHero } from "../Epicsevendb";
 import { HeroSummary } from "./model/heroSummary";
 import { Entry } from "../utility/Cache";
 import config from "../../config.json";
 import { differenceInDays } from "date-fns";
+import { Hero } from "./model/Hero";
+import HeroCache from "./HeroCache";
 
-const cacheKey = "H";
-const cache = new HeroListCache();
+const heroListCacheKey = "H";
+const heroListCache = new HeroListCache();
+const heroCache = new HeroCache();
 
 async function getHeroesList(): Promise<HeroSummary[]> {
-  let cachedValue = cache.get(cacheKey);
+  let cachedValue = heroListCache.get(heroListCacheKey);
 
   let heroes: HeroSummary[] = [];
-  if (isCacheValid(cachedValue)) {
-    if (isCacheExpired(cachedValue)) {
-      console.log("cache expired");
-    }
+  if (isCacheInvalid(cachedValue)) {
     console.log("cache is empty");
     heroes = await getHeroes();
-    console.log(heroes.length);
-    cache.put(cacheKey, heroes, new Date());
+    if (heroes !== null && heroes.length > 0) {
+      heroListCache.put(heroListCacheKey, heroes, new Date());
+    }
   } else {
     console.log("cache is not empty");
     heroes = cachedValue.value;
-    console.log(heroes.length);
   }
   return heroes;
 }
 
-function isCacheValid(cachedValue: Entry<HeroSummary[]>) {
+async function getHeroById(heroId: string) {
+  let cachedValue = heroCache.get(heroId);
+  let hero: Hero = null;
+  if (isCacheInvalid(cachedValue)) {
+    hero = await getHero(heroId);
+    if (hero !== null) {
+      heroCache.put(heroId, hero, new Date());
+    }
+  } else {
+    console.log("Getting hero " + heroId + " from cache");
+    hero = cachedValue.value;
+  }
+  return hero;
+}
+
+function isCacheInvalid(cachedValue: Entry<Hero> | Entry<HeroSummary[]>) {
   return cachedValue === undefined || isCacheExpired(cachedValue);
 }
 
-function isCacheExpired(entry: Entry<HeroSummary[]>): boolean {
+function isCacheExpired(entry: Entry<HeroSummary[]> | Entry<Hero>): boolean {
   if (entry === undefined) {
     return true;
   }
@@ -42,4 +57,4 @@ function isCacheExpired(entry: Entry<HeroSummary[]>): boolean {
   );
 }
 
-export { getHeroesList };
+export { getHeroesList, getHeroById };

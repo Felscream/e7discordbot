@@ -1,5 +1,5 @@
 import { Message, TextChannel, MessageEmbed } from "discord.js";
-import { displayHeroes, getHeroes } from "./hero/HeroHandler";
+import { displayHeroes, displayHero } from "./hero/HeroHandler";
 
 class CommandHandler {
   private prefix: string;
@@ -37,16 +37,23 @@ class CommandHandler {
         message.channel.send(`deleted  ${num - 1} posts for you`);
         break;
       case "embed":
-        const embed = new MessageEmbed()
-          .setColor("#efe117")
-          .setTitle("Embed testing")
-          .setThumbnail(
-            "https://assets.epicsevendb.com/_source/face/c1100_s.png"
-          );
-        message.channel.send(embed);
+        message.channel.send(
+          new MessageEmbed()
+            .setColor("#efe117")
+            .setTitle("Embed testing")
+            .setThumbnail(
+              "https://assets.epicsevendb.com/_source/face/c1100_s.png"
+            )
+        );
+        break;
+      case "heroes":
+        displayHeroes(message);
         break;
       case "hero":
-        displayHeroes(message);
+        const embed = await displayHero(args);
+        if (embed !== null) {
+          message.channel.send(embed);
+        }
         break;
       default:
         console.log("Unrecognized command");

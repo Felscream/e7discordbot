@@ -1,0 +1,38 @@
+{
+  "attributeColor": {
+    "fire": "#f44c35",
+    "earth": "#77c615",
+    "ice": "#2495f2",
+    "light": "#f2e124",
+    "dark": "#7215bf"
+  },
+  "roleEmoji": {
+    "warrior": "<:e7warrior:835897984004259882>",
+    "knight": "<:e7knight:835897984179765312>",
+    "thief": "<:e7thief:835897984499187732>",
+    "mage": "<:e7mage:835897983810666526>",
+    "ranger": "<:e7ranger:835897983643287592>",
+    "soul weaver": "<:e7soulweaver:835897983441829898>"
+  },
+  "attribute": {
+    "earth": "<:e7earth:835897984369688587>",
+    "ice": "<:e7ice:835897983810928640>",
+    "fire": "<:e7fire:835897984070713375>",
+    "light": "<:e7light:835897984230752327>",
+    "dark": "<:e7dark:835897983979356160>"
+  },
+  "zodiac": {
+    "aries": "<:e7aries:835897983497142332>",
+    "taurus": "<:e7taurus:835897983421120522>",
+    "gemini": "<:e7gemini:835897983799263292>",
+    "cancer": "<:e7cancer:835897984142147636>",
+    "leo": "<:e7leo:835897984431947776>",
+    "virgo": "<:e7virgo:835897983022137406>",
+    "libra": "<:e7libra:835897983178375189>",
+    "scorpio": "<:e7scorpio:835897983055953970>",
+    "sagittarius": "<:e7sagittarius:835897983983419472>",
+    "capricorn": "<:e7capricorn:835897982989107270>",
+    "aquarius": "<:e7aquarius:835897983513264188>",
+    "pisces": "<:e7pisces:835897982716608533>"
+  }
+}
