@@ -104,7 +104,7 @@ function isPercentageDevotion(type: DevotionType): boolean {
 }
 
 function buildHeroStats(hero: Hero): string {
-  return "**Stats(Lv. 50 → Lv. 60**";
+  return "**Stats(Lv. 50 → Lv. 60)**";
 }
 
 function capitalize(str: string) {

@@ -1,8 +1,9 @@
 import { Channel, MessageEmbed } from "discord.js";
 import { Menu } from "discord.js-menu";
 import { getHeroesList } from "../hero/HeroService";
-import { Attribute } from "../hero/model/characteristics";
+import { Attribute, Role } from "../hero/model/characteristics";
 import config from "../../config.json";
+import * as resources from "../../resources/resources.json";
 
 class HeroListMenu {
   private channel: Channel;
@@ -31,7 +32,8 @@ class HeroListMenu {
     const heroes = await getHeroesList();
     return heroes
       .map(
-        (value) => new HeroPreview(value.name, value.attribute, value.rarity)
+        (value) =>
+          new HeroPreview(value.name, value.attribute, value.rarity, value.role)
       )
       .sort((a, b) => HeroListMenu.sortAlphabetically(a, b));
   }
@@ -52,11 +54,15 @@ class HeroListMenu {
         sortedHeroes.length
       );
       const content = new MessageEmbed()
-        .setTitle(`Available heroes ${i + 1}/${pagesNb}`)
+        .setTitle("Hero list")
         .setDescription(
           HeroListMenu.generatePageContent(
-            sortedHeroes.slice(startIndex, endIndex)
+            sortedHeroes.slice(startIndex, endIndex),
+            startIndex + 1
           )
+        )
+        .setFooter(
+          HeroListMenu.buildFooter(i + 1, pagesNb, sortedHeroes.length)
         );
       const page = {
         name: `${i}`,
@@ -73,20 +79,29 @@ class HeroListMenu {
     return pages;
   }
 
-  private static generatePageContent(heroes: HeroPreview[]): string {
-    let description = "**";
-    description += heroes
-      .map((hero) => {
-        let display = hero.name;
-        display += "            ";
+  private static generatePageContent(
+    heroes: HeroPreview[],
+    startIndex: number
+  ): string {
+    return heroes
+      .map((hero, index) => {
+        let display = `**${startIndex + index}.** [`;
         for (let i = 0; i < hero.rarity; i++) {
           display += "\u2605";
         }
+        display += "]" + resources.roleEmoji[hero.role] + hero.name;
+
         return display;
       })
       .join("\n");
+  }
 
-    return description + "**";
+  private static buildFooter(
+    pageNumber: number,
+    totalPages: number,
+    results: number
+  ): string {
+    return `Page ${pageNumber}/${totalPages} | Results: ${results}`;
   }
 
   private static sortAlphabetically(a: HeroPreview, b: HeroPreview): number {
@@ -106,10 +121,12 @@ class HeroPreview {
   name: string;
   attribute: Attribute;
   rarity: number;
-  constructor(name: string, attribute: Attribute, rarity: number) {
+  role: Role;
+  constructor(name: string, attribute: Attribute, rarity: number, role: Role) {
     this.name = name;
     this.attribute = attribute;
     this.rarity = rarity;
+    this.role = role;
   }
 }
 
