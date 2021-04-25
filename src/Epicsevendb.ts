@@ -1,6 +1,6 @@
 import config from "../config.json";
 import axios from "axios";
-import HeroSummaryMapper from "./hero/heroSummaryMapper";
+import HeroSummaryMapper from "./hero/HeroSummaryMapper";
 import { HeroSummary } from "./hero/model/heroSummary";
 const url = config.epicsevendb;
 const heroesUrl = url + "hero";

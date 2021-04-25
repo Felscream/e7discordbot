@@ -1,5 +1,5 @@
 import { Message, TextChannel, MessageEmbed } from "discord.js";
-import { getHeroesList } from "./hero/heroHandler";
+import { displayHeroes, getHeroes } from "./hero/HeroHandler";
 
 class CommandHandler {
   private prefix: string;
@@ -46,7 +46,7 @@ class CommandHandler {
         message.channel.send(embed);
         break;
       case "hero":
-        const list = await getHeroesList();
+        displayHeroes(message);
         break;
       default:
         console.log("Unrecognized command");
