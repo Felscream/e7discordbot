@@ -15,6 +15,8 @@ class DevotionHelper {
         return "Effectiveness";
       case DevotionType.EFFECT_RESISTANCE:
         return "Effect Resistance";
+      case DevotionType.SPEED:
+        return "Speed";
       case DevotionType.MAX_HP:
       case DevotionType.MAX_HP_RATE:
       default:

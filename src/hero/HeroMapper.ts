@@ -2,6 +2,7 @@ import {
   Attribute,
   Devotion,
   DevotionType,
+  DevotionGrades,
   HeroStats,
   Role,
   Zodiac,
@@ -91,10 +92,36 @@ class HeroMapper {
   }
 
   private static mapDevotion(rawDevotion: any): Devotion {
+    const devotionType = HeroMapper.mapDevotionType(rawDevotion.type);
     return new Devotion(
-      HeroMapper.mapDevotionType(rawDevotion.type),
-      rawDevotion.grades
+      devotionType,
+      HeroMapper.mapDevotionGrades(rawDevotion.grades, devotionType)
     );
+  }
+
+  private static mapDevotionGrades(
+    grades: any,
+    devotionType: DevotionType
+  ): DevotionGrades[] {
+    let mappedGrades: DevotionGrades[] = [];
+    const isPercentage = HeroMapper.isPercentageDevotion(devotionType);
+    Object.keys(grades).forEach((key) => {
+      mappedGrades.push(
+        new DevotionGrades(
+          key,
+          HeroMapper.getDevotionValue(grades[key], isPercentage)
+        )
+      );
+    });
+
+    return mappedGrades;
+  }
+
+  private static getDevotionValue(
+    value: number,
+    isPercentage: boolean
+  ): number {
+    return isPercentage ? Math.round(value * 1000) / 10 : value;
   }
 
   private static mapDevotionType(devotionType: any): DevotionType {
@@ -115,6 +142,8 @@ class HeroMapper {
         return DevotionType.ATTACK;
       case "att_rate":
         return DevotionType.ATTACK_RATE;
+      case "speed":
+        return DevotionType.SPEED;
       default:
       case "cri":
         return DevotionType.CRITICAL;
@@ -146,11 +175,20 @@ class HeroMapper {
       Number(stats.hp),
       Number(stats.spd),
       Number(stats.def),
-      Number(Math.round(stats.chc * 100)),
-      Number(Math.round(stats.chd * 100)),
-      Number(Math.round(stats.dac * 100)),
-      Number(Math.round(stats.eff * 100)),
-      Number(Math.round(stats.efr * 100))
+      Number(Math.round(stats.chc * 1000) / 10),
+      Number(Math.round(stats.chd * 1000) / 10),
+      Number(Math.round(stats.dac * 1000) / 10),
+      Number(Math.round(stats.eff * 1000) / 10),
+      Number(Math.round(stats.efr * 1000) / 10)
+    );
+  }
+
+  private static isPercentageDevotion(type: DevotionType): boolean {
+    return (
+      type.includes("rate") ||
+      type === DevotionType.EFFECTIVENESS ||
+      type === DevotionType.EFFECT_RESISTANCE ||
+      type == DevotionType.CRITICAL
     );
   }
 }

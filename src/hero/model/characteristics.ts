@@ -40,12 +40,22 @@ enum DevotionType {
   ATTACK = "att",
   ATTACK_RATE = "att_rate",
   CRITICAL = "cri",
+  SPEED = "speed",
+}
+
+class DevotionGrade {
+  grade: string;
+  value: number;
+  constructor(grade: string, value: number) {
+    this.grade = grade;
+    this.value = value;
+  }
 }
 
 class Devotion {
   type: DevotionType;
-  grades: any;
-  constructor(type: DevotionType, grades: any) {
+  grades: DevotionGrade[];
+  constructor(type: DevotionType, grades: DevotionGrade[]) {
     this.type = type;
     this.grades = grades;
   }
@@ -59,7 +69,7 @@ class HeroStats {
   defense: number;
   criticalChance: number;
   criticalDamage: number;
-  doubleAttack: number;
+  dualAttack: number;
   effectiveness: number;
   effectResistance: number;
 
@@ -82,10 +92,18 @@ class HeroStats {
     this.defense = defense;
     this.criticalChance = criticalChance;
     this.criticalDamage = criticalDamage;
-    this.doubleAttack = doubleAttack;
+    this.dualAttack = doubleAttack;
     this.effectiveness = effectiveness;
     this.effectResistance = effectResistance;
   }
 }
 
-export { Attribute, Role, Zodiac, Devotion, DevotionType, HeroStats };
+export {
+  Attribute,
+  Role,
+  Zodiac,
+  Devotion,
+  DevotionType,
+  DevotionGrade as DevotionGrades,
+  HeroStats,
+};

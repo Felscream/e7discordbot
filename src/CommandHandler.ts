@@ -44,6 +44,8 @@ class CommandHandler {
             .setThumbnail(
               "https://assets.epicsevendb.com/_source/face/c1100_s.png"
             )
+            .addField("\u200B", "something\n another thing", true)
+            .addField("\u200B", "something\n another thing", true)
         );
         break;
       case "heroes":
