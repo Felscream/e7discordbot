@@ -1,4 +1,5 @@
 import { Message, TextChannel, MessageEmbed } from "discord.js";
+import displayHelp from "./hero/HelpHandler";
 import { displayHeroes, displayHero } from "./hero/HeroHandler";
 
 class CommandHandler {
@@ -34,6 +35,9 @@ class CommandHandler {
         if (embed !== null) {
           message.channel.send(embed);
         }
+        break;
+      case "help":
+        displayHelp(message, args);
         break;
       default:
         console.log("Unrecognized command");
