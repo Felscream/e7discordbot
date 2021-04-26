@@ -4,6 +4,7 @@ import { getHeroesList } from "../hero/HeroService";
 import { Attribute, Role } from "../hero/model/characteristics";
 import config from "../../config.json";
 import * as resources from "../../resources/resources.json";
+import HeroSorter from "../hero/HeroSorter";
 
 class HeroListMenu {
   private channel: Channel;
@@ -15,8 +16,8 @@ class HeroListMenu {
     this.author = author;
   }
 
-  async start() {
-    const pages = await this.generatePages();
+  async start(args: string[]) {
+    const pages = await this.generatePages(args);
     if (pages.length > 0) {
       this.menu = new Menu(
         this.channel,
@@ -28,23 +29,14 @@ class HeroListMenu {
     }
   }
 
-  private static async getSortedHeroes(): Promise<HeroPreview[]> {
-    const heroes = await getHeroesList();
-    return heroes
-      .map(
-        (value) =>
-          new HeroPreview(value.name, value.attribute, value.rarity, value.role)
-      )
-      .sort((a, b) => HeroListMenu.sortAlphabetically(a, b));
-  }
-
-  private async generatePages(): Promise<any[]> {
-    let sortedHeroes: HeroPreview[] = [];
+  private async generatePages(args: string[]): Promise<any[]> {
+    let heroes: HeroPreview[] = [];
     try {
-      sortedHeroes = await HeroListMenu.getSortedHeroes();
+      heroes = await getHeroesList();
     } catch (e) {
       return [];
     }
+    const sortedHeroes = HeroSorter.sortHeroes(heroes, args);
     const pagesNb = Math.ceil(sortedHeroes.length / config.heroesPerPage);
     let pages: any[] = [];
     for (let i = 0; i < pagesNb; i++) {
@@ -103,18 +95,6 @@ class HeroListMenu {
   ): string {
     return `Page ${pageNumber}/${totalPages} | Results: ${results}`;
   }
-
-  private static sortAlphabetically(a: HeroPreview, b: HeroPreview): number {
-    if (a.name > b.name) {
-      return 1;
-    }
-
-    if (a.name < b.name) {
-      return -1;
-    }
-
-    return 0;
-  }
 }
 
 class HeroPreview {
@@ -130,4 +110,4 @@ class HeroPreview {
   }
 }
 
-export default HeroListMenu;
+export { HeroListMenu, HeroPreview };

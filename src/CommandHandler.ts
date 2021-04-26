@@ -14,43 +14,21 @@ class CommandHandler {
       return;
     }
 
-    const args = message.content.slice(this.prefix.length).trim().split(" ");
-    const command = args.shift().toLowerCase();
+    const args = message.content
+      .slice(this.prefix.length)
+      .trim()
+      .toLowerCase()
+      .split(" ");
+    const command = args.shift();
 
     console.log("command: ", command);
     console.log(args);
 
     switch (command) {
-      case "ego":
-        message.react("😀");
-        message.reply("wow, what a great post");
-        break;
-      case "clear":
-        let num = 2;
-
-        if (args[0]) {
-          num = parseInt(args[0]) + 1;
-        }
-
-        const channel = <TextChannel>message.channel;
-        channel.bulkDelete(num);
-        message.channel.send(`deleted  ${num - 1} posts for you`);
-        break;
-      case "embed":
-        message.channel.send(
-          new MessageEmbed()
-            .setColor("#efe117")
-            .setTitle("Embed testing")
-            .setThumbnail(
-              "https://assets.epicsevendb.com/_source/face/c1100_s.png"
-            )
-            .addField("\u200B", "something\n another thing", true)
-            .addField("\u200B", "something\n another thing", true)
-        );
-        break;
       case "heroes":
-        displayHeroes(message);
+        displayHeroes(message, args);
         break;
+      case "h":
       case "hero":
         const embed = await displayHero(args);
         if (embed !== null) {

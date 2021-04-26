@@ -1,12 +1,12 @@
 import { Message, MessageEmbed } from "discord.js";
 import createHeroEmbed from "../embeds/HeroEmbed";
-import HeroListMenu from "../menus/HeroListMenu";
+import { HeroListMenu } from "../menus/HeroListMenu";
 import { getHeroesList, getHeroById } from "./HeroService";
 import { HeroSummary } from "./model/heroSummary";
 
-async function displayHeroes(message: Message) {
+async function displayHeroes(message: Message, args: string[]) {
   const menu = new HeroListMenu(message.channel, message.author.id);
-  menu.start();
+  menu.start(args);
 }
 
 async function displayHero(args: string[]): Promise<MessageEmbed> {
