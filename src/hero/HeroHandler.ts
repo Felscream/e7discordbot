@@ -5,6 +5,7 @@ import { HeroListMenu } from "../menus/HeroListMenu";
 import { getHeroesList, getHeroById } from "./HeroService";
 import { HeroSummary } from "./model/heroSummary";
 import Config from "../../config.json";
+import HeroAliases from "../../resources/unitAliases.json";
 
 async function displayHeroes(message: Message, args: string[]) {
   const menu = new HeroListMenu(message.channel, message.author.id);
@@ -19,13 +20,15 @@ async function displayHero(args: string[]): Promise<MessageEmbed> {
     return;
   }
   const heroName = args.join(" ");
-  let requestedHero: HeroSummary = findHeroWithName(heroName, heroes);
-  if (requestedHero === undefined) {
+
+  let heroId = findHeroId(heroName, heroes);
+
+  if (heroId.length === 0) {
     console.log("No result for search request '" + args.join(" ") + "'");
     return null;
   }
 
-  const hero = await getHeroById(requestedHero.id);
+  const hero = await getHeroById(heroId);
   if (hero !== null) {
     return createHeroEmbed(hero);
   }
@@ -33,21 +36,41 @@ async function displayHero(args: string[]): Promise<MessageEmbed> {
   return null;
 }
 
-function findHeroWithName(input: string, heroes: HeroSummary[]): HeroSummary {
+function findHeroIdWithName(input: string, heroes: HeroSummary[]): string {
   let score = Number.MAX_VALUE;
-  let hero: HeroSummary = undefined;
+  let heroId: string = "";
   for (let i = 0; i < heroes.length; i++) {
     let heroScore = levensthein(input, heroes[i].name, true);
     if (heroScore == 0) {
-      return heroes[i];
+      return heroes[i].id;
     }
     if (heroScore <= Config.typoTolerance && heroScore < score) {
       score = heroScore;
-      hero = heroes[i];
+      heroId = heroes[i].id;
     }
   }
 
-  return hero;
+  return heroId;
+}
+
+function findHeroId(heroName: string, heroes: HeroSummary[]): string {
+  let heroId = findHeroWithAlias(heroName);
+
+  if (heroId.length === 0) {
+    heroId = findHeroIdWithName(heroName, heroes);
+  }
+
+  return heroId.trim();
+}
+
+function findHeroWithAlias(alias: string): string {
+  const aliases = HeroAliases.aliases;
+  for (let entry in HeroAliases.aliases) {
+    if (aliases[entry].alias.includes(alias)) {
+      return aliases[entry].id;
+    }
+  }
+  return "";
 }
 
 export { displayHeroes, displayHero };

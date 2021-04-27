@@ -3,7 +3,7 @@ import { Menu } from "discord.js-menu";
 import { getHeroesList } from "../hero/HeroService";
 import { Attribute, Role } from "../hero/model/characteristics";
 import config from "../../config.json";
-import * as resources from "../../resources/resources.json";
+import * as resources from "../../resources/embedResources.json";
 import HeroSorter from "../hero/HeroSorter";
 
 class HeroListMenu {

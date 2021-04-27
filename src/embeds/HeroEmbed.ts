@@ -5,7 +5,7 @@ import {
   DevotionGrades,
   DevotionType,
 } from "../hero/model/characteristics";
-import * as resources from "../../resources/resources.json";
+import * as resources from "../../resources/embedResources.json";
 import { Hero } from "../hero/model/Hero";
 
 function createHeroEmbed(hero: Hero): MessageEmbed {

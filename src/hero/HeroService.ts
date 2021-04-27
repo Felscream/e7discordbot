@@ -7,6 +7,8 @@ import { differenceInDays } from "date-fns";
 import { Hero } from "./model/Hero";
 import HeroCache from "./HeroCache";
 
+import fs from "fs";
+
 const heroListCacheKey = "H";
 const heroListCache = new HeroListCache();
 const heroCache = new HeroCache();
@@ -25,6 +27,7 @@ async function getHeroesList(): Promise<HeroSummary[]> {
     console.log("cache is not empty");
     heroes = cachedValue.value;
   }
+
   return heroes;
 }
 
