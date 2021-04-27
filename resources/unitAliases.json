@@ -204,7 +204,7 @@
     { "id": "eaton", "alias": [] },
     { "id": "elson", "alias": [] },
     { "id": "enott", "alias": [] },
-    { "id": "falconer-kluri", "alias": [] },
+    { "id": "falconer-kluri", "alias": ["fkluri"] },
     { "id": "glenn", "alias": [] },
     { "id": "gloomyrain", "alias": [] },
     { "id": "godmother", "alias": [] },
