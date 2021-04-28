@@ -12,7 +12,6 @@ async function getHeroes(): Promise<HeroSummary[]> {
       `ERROR received from ${config.heroesUrl}: ${exception}\n`
     );
     const error = new Error("Error getting list of available heroes");
-    console.log("Error: ", error);
     throw error;
   }
 
@@ -29,17 +28,17 @@ async function getHero(id: string): Promise<Hero> {
   try {
     response = await axios.get(url);
   } catch (exception) {
-    process.stderr.write(`ERROR received from ${url}: ${exception}\n`);
-    const error = new Error(`Error getting hero data for id ${id}`);
-    console.log("Error: ", error);
+    process.stderr.write(
+      `ERROR received from ${url}: ${exception}\nError getting hero for id '${id}'\n`
+    );
+    const error = new Error(`Error getting hero with id '${id}'`);
     throw error;
   }
 
   if (response.data !== undefined && response.data.results.length > 0) {
     return await HeroMapper.mapHero(response.data.results[0]);
   }
-  const error = new Error(`Received no hero result data for id ${id}`);
-  console.log("Error: ", error);
+  const error = new Error(`Received no hero result with id '${id}'\n`);
   throw error;
 }
 

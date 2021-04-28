@@ -1,6 +1,15 @@
-function levensthein(a: string, b: string, ignoreCase: boolean = false) {
+function levensthein(
+  a: string,
+  b: string,
+  ignoreCase: boolean = false
+): number {
   const firstString = ignoreCase ? a.toLowerCase() : a;
   const secondString = ignoreCase ? b.toLowerCase() : b;
+
+  if (firstString === secondString) {
+    return 0;
+  }
+
   var n = a.length,
     m = b.length,
     matrix: number[][] = [];

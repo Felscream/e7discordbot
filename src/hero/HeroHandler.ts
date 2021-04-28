@@ -6,6 +6,7 @@ import { getHeroesList, getHeroById } from "./HeroService";
 import { HeroSummary } from "./model/heroSummary";
 import Config from "../../config.json";
 import HeroAliases from "../../resources/unitAliases.json";
+import { Hero } from "./model/Hero";
 
 async function displayHeroes(message: Message, args: string[]) {
   const menu = new HeroListMenu(message.channel, message.author.id);
@@ -28,15 +29,27 @@ async function displayHero(args: string[]): Promise<MessageEmbed> {
     return null;
   }
 
-  const hero = await getHeroById(heroId);
-  if (hero !== null) {
-    return createHeroEmbed(hero);
+  let hero: Hero;
+  try {
+    hero = await getHeroById(heroId);
+  } catch (e) {
+    console.log("No result for search request '" + args.join(" ") + "'");
+    return null;
   }
 
-  return null;
+  if (hero === null) {
+    console.log("No result for search request '" + args.join(" ") + "'");
+    return null;
+  }
+
+  return createHeroEmbed(hero);
 }
 
 function findHeroIdWithName(input: string, heroes: HeroSummary[]): string {
+  if (input.length > Config.levenstheinMaxLength) {
+    return "";
+  }
+
   let score = Number.MAX_VALUE;
   let heroId: string = "";
   for (let i = 0; i < heroes.length; i++) {
