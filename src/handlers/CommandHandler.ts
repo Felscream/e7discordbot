@@ -1,6 +1,6 @@
 import { Message, TextChannel, MessageEmbed } from "discord.js";
-import displayHelp from "./hero/HelpHandler";
-import { displayHeroes, displayHero } from "./hero/HeroHandler";
+import displayHelp from "./HelpHandler";
+import { displayHeroes, displayHero } from "./HeroHandler";
 
 class CommandHandler {
   private prefix: string;

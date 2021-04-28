@@ -85,7 +85,10 @@
     { "id": "melissa", "alias": [] },
     { "id": "mort", "alias": [] },
     { "id": "mui", "alias": [] },
-    { "id": "operator-sigret", "alias": ["mlsigret", "ml sigret"] },
+    {
+      "id": "operator-sigret",
+      "alias": ["mlsigret", "ml sigret", "opsigret", "op sigret"]
+    },
     { "id": "pavel", "alias": [] },
     { "id": "politis", "alias": [] },
     { "id": "ravi", "alias": [] },

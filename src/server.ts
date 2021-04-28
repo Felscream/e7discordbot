@@ -1,5 +1,5 @@
 import * as Config from "../config.json";
-import CommandHandler from "./CommandHandler";
+import CommandHandler from "./handlers/CommandHandler";
 import Discord from "discord.js";
 
 const bot = new Discord.Client();

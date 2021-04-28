@@ -2,11 +2,11 @@ import { Message, MessageEmbed } from "discord.js";
 import levensthein from "../utility/Levensthein";
 import createHeroEmbed from "../embeds/HeroEmbed";
 import { HeroListMenu } from "../menus/HeroListMenu";
-import { getHeroesList, getHeroById } from "./HeroService";
-import { HeroSummary } from "./model/heroSummary";
+import { getHeroesList, getHeroById } from "../hero/HeroService";
+import { HeroSummary } from "../hero/model/heroSummary";
 import Config from "../../config.json";
 import HeroAliases from "../../resources/unitAliases.json";
-import { Hero } from "./model/Hero";
+import { Hero } from "../hero/model/Hero";
 
 async function displayHeroes(message: Message, args: string[]) {
   const menu = new HeroListMenu(message.channel, message.author.id);
