@@ -31,7 +31,7 @@ async function displayHero(args: string[]): Promise<MessageEmbed> {
 
   let hero: Hero;
   try {
-    process.stdout.write(`Looking for hero with id '${heroId}'`);
+    process.stdout.write(`Looking for hero with id '${heroId}'\n`);
     hero = await getHeroById(heroId);
   } catch (e) {
     console.log("No result for search request '" + args.join(" ") + "'");
