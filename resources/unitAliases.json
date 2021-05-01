@@ -6,7 +6,7 @@
       "id": "apocalypse-ravi",
       "alias": ["aravi", "dark ravi", "ml ravi", "mlravi"]
     },
-    { "id": "aramintha", "alias": [] },
+    { "id": "aramintha", "alias": ["ara"] },
     {
       "id": "arbiter-vildred",
       "alias": ["arby", "ml vildred", "avildred", "mlvildred", "meta", "cancer"]
@@ -102,7 +102,7 @@
     { "id": "sigret", "alias": [] },
     {
       "id": "silver-blade-aramintha",
-      "alias": ["ml aramintha", "mlaramintha"]
+      "alias": ["ml aramintha", "mlaramintha", "ml ara", "mlara"]
     },
     { "id": "sol", "alias": [] },
     { "id": "specimen-sez", "alias": ["spez", "mlsez", "ml sez"] },
