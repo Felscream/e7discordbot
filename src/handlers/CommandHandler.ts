@@ -1,6 +1,7 @@
 import { Message, TextChannel, MessageEmbed } from "discord.js";
 import displayHelp from "./HelpHandler";
 import { displayHeroes, displayHero } from "./HeroHandler";
+import handleReport from "./ReportHandler";
 
 class CommandHandler {
   private prefix: string;
@@ -19,7 +20,8 @@ class CommandHandler {
       .slice(this.prefix.length)
       .trim()
       .toLowerCase()
-      .split(" ");
+      .split(" ")
+      .filter((arg) => arg.length > 0);
     const command = args.shift();
 
     console.log("command: ", command);
@@ -39,8 +41,12 @@ class CommandHandler {
       case "help":
         displayHelp(message, args);
         break;
+      case "report":
+        handleReport(message, args);
+        break;
       default:
         console.log("Unrecognized command");
+        break;
     }
   }
 
