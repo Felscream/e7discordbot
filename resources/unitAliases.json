@@ -4,14 +4,17 @@
     { "id": "ambitious-tywin", "alias": ["atywin", "mltwyn", "ml tywin"] },
     {
       "id": "apocalypse-ravi",
-      "alias": ["aravi", "dark ravi", "ml ravi", "mlravi"]
+      "alias": ["aravi", "dark ravi", "ml ravi", "mlravi", "a ravi"]
     },
     { "id": "aramintha", "alias": ["ara"] },
     {
       "id": "arbiter-vildred",
       "alias": ["arby", "ml vildred", "avildred", "mlvildred", "meta", "cancer"]
     },
-    { "id": "archdemons-shadow", "alias": ["shadow", "arch", "dark meru"] },
+    {
+      "id": "archdemons-shadow",
+      "alias": ["shadow", "demon", "arch", "dark meru"]
+    },
     { "id": "baal-sezan", "alias": ["baal"] },
     { "id": "baiken", "alias": [] },
     { "id": "basar", "alias": [] },
@@ -32,7 +35,7 @@
     { "id": "dark-corvus", "alias": ["dc", "ml corvus", "mlcorvus"] },
     {
       "id": "desert-jewel-basar",
-      "alias": ["djb", "dj basar", "ml basar", "mlbasar"]
+      "alias": ["djb", "dj basar", "ml basar", "mlbasar", "djbasar"]
     },
     {
       "id": "designer-lilibet",
@@ -97,7 +100,7 @@
     { "id": "roana", "alias": [] },
     { "id": "ruele-of-light", "alias": ["ruele"] },
     { "id": "sage-baal-sezan", "alias": ["ml baal", "mlbaal"] },
-    { "id": "seaside-bellona", "alias": ["sbellona", "ssb"] },
+    { "id": "seaside-bellona", "alias": ["sbellona", "ssb", "ssbellona"] },
     { "id": "sez", "alias": [] },
     { "id": "sigret", "alias": [] },
     {
@@ -112,7 +115,10 @@
     },
     { "id": "tamarinne", "alias": [] },
     { "id": "tenebria", "alias": [] },
-    { "id": "top-model-luluca", "alias": ["tml", "mlluluca", "ml luluca"] },
+    {
+      "id": "top-model-luluca",
+      "alias": ["tml", "mlluluca", "ml luluca", "tomoca"]
+    },
     { "id": "tywin", "alias": [] },
     { "id": "vildred", "alias": [] },
     { "id": "violet", "alias": [] },
@@ -121,7 +127,7 @@
     { "id": "yuna", "alias": [] },
     { "id": "zeno", "alias": [] },
     { "id": "achates", "alias": [] },
-    { "id": "angelica", "alias": ["angie"] },
+    { "id": "angelica", "alias": ["angie", "angi"] },
     { "id": "armin", "alias": [] },
     {
       "id": "assassin-cartuja",
@@ -134,7 +140,7 @@
       "id": "benevolent-romann",
       "alias": ["bromann", "ml romann", "mlromann"]
     },
-    { "id": "blaze-dingo", "alias": [] },
+    { "id": "blaze-dingo", "alias": ["ml dingo", "mldingo"] },
     { "id": "blood-blade-karin", "alias": ["bbk", "mlkarin", "ml karin"] },
     { "id": "cartuja", "alias": [] },
     { "id": "celestial-mercedes", "alias": [] },
@@ -145,7 +151,7 @@
     { "id": "coli", "alias": [] },
     { "id": "corvus", "alias": [] },
     { "id": "crescent-moon-rin", "alias": ["ml rin", "mlrin"] },
-    { "id": "crimson-armin", "alias": [] },
+    { "id": "crimson-armin", "alias": ["carmin"] },
     { "id": "crozet", "alias": [] },
     { "id": "dingo", "alias": [] },
     { "id": "dominiel", "alias": [] },
@@ -153,13 +159,13 @@
     { "id": "free-spirit-tieria", "alias": [] },
     { "id": "furious", "alias": [] },
     { "id": "general-purrgis", "alias": ["gpurgis", "gpurrgis"] },
-    { "id": "great-chief-khawana", "alias": [] },
-    { "id": "guider-aither", "alias": [] },
+    { "id": "great-chief-khawana", "alias": ["ml khawana"] },
+    { "id": "guider-aither", "alias": ["gaither"] },
     { "id": "karin", "alias": [] },
     { "id": "khawana", "alias": [] },
     { "id": "khawazu", "alias": [] },
-    { "id": "kitty-clarissa", "alias": ["klarissa"] },
-    { "id": "kizuna-ai", "alias": [] },
+    { "id": "kitty-clarissa", "alias": ["klarissa", "k clarissa"] },
+    { "id": "kizuna-ai", "alias": ["kizuna"] },
     { "id": "leo", "alias": [] },
     { "id": "lots", "alias": [] },
     { "id": "maya", "alias": [] },
@@ -174,12 +180,15 @@
     { "id": "shadow-rose", "alias": ["srose", "ml rose", "mlrose"] },
     { "id": "shooting-star-achates", "alias": [] },
     { "id": "silk", "alias": [] },
-    { "id": "sinful-angelica", "alias": ["singelica"] },
+    {
+      "id": "sinful-angelica",
+      "alias": ["singelica", "ml angelica", "mlangelica"]
+    },
     { "id": "surin", "alias": [] },
     { "id": "tempest-surin", "alias": ["tsurin", "coackroach"] },
     { "id": "troublemaker-crozet", "alias": [] },
-    { "id": "wanderer-silk", "alias": [] },
-    { "id": "watcher-schuri", "alias": [] },
+    { "id": "wanderer-silk", "alias": ["ml silk", "mlsilk"] },
+    { "id": "watcher-schuri", "alias": ["mlschuri", "ml schuri"] },
     { "id": "zerato", "alias": [] },
     { "id": "adlay", "alias": [] },
     { "id": "adventurer-ras", "alias": ["aras"] },
@@ -201,7 +210,7 @@
     { "id": "chaos-inquisitor", "alias": [] },
     { "id": "chaos-sect-axe", "alias": [] },
     { "id": "church-of-ilryos-axe", "alias": [] },
-    { "id": "commander-lorina", "alias": [] },
+    { "id": "commander-lorina", "alias": ["sc lorina"] },
     { "id": "doll-maker-pearlhorizon", "alias": [] },
     { "id": "doris", "alias": [] },
     { "id": "eaton", "alias": [] },
