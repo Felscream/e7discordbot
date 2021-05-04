@@ -113,7 +113,7 @@
       "id": "specter-tenebria",
       "alias": ["stene", "stenebria", "ml tenebria", "mltenebria"]
     },
-    { "id": "tamarinne", "alias": [] },
+    { "id": "tamarinne", "alias": ["tama"] },
     { "id": "tenebria", "alias": [] },
     {
       "id": "top-model-luluca",
@@ -135,10 +135,20 @@
     },
     { "id": "assassin-cidd", "alias": ["acidd", "acid", "mlcidd", "ml cidd"] },
     { "id": "assassin-coli", "alias": ["acoli", "mlcoli", "ml coli"] },
-    { "id": "auxiliary-lots", "alias": ["alots", "ml lots", "mllots"] },
+    {
+      "id": "auxiliary-lots",
+      "alias": ["alots", "ml lots", "mllots", "a lots"]
+    },
     {
       "id": "benevolent-romann",
-      "alias": ["bromann", "ml romann", "mlromann"]
+      "alias": [
+        "bromann",
+        "ml romann",
+        "mlromann",
+        "broman",
+        "ml roman",
+        "mlroman"
+      ]
     },
     { "id": "blaze-dingo", "alias": ["ml dingo", "mldingo"] },
     { "id": "blood-blade-karin", "alias": ["bbk", "mlkarin", "ml karin"] },
@@ -151,7 +161,7 @@
     { "id": "coli", "alias": [] },
     { "id": "corvus", "alias": [] },
     { "id": "crescent-moon-rin", "alias": ["ml rin", "mlrin"] },
-    { "id": "crimson-armin", "alias": ["carmin"] },
+    { "id": "crimson-armin", "alias": ["carmin", "ml armin", "mlarmin"] },
     { "id": "crozet", "alias": [] },
     { "id": "dingo", "alias": [] },
     { "id": "dominiel", "alias": [] },
@@ -159,7 +169,7 @@
     { "id": "free-spirit-tieria", "alias": [] },
     { "id": "furious", "alias": [] },
     { "id": "general-purrgis", "alias": ["gpurgis", "gpurrgis"] },
-    { "id": "great-chief-khawana", "alias": ["ml khawana"] },
+    { "id": "great-chief-khawana", "alias": ["ml khawana", "ml khawana"] },
     { "id": "guider-aither", "alias": ["gaither"] },
     { "id": "karin", "alias": [] },
     { "id": "khawana", "alias": [] },
@@ -178,7 +188,10 @@
     { "id": "schuri", "alias": [] },
     { "id": "serila", "alias": [] },
     { "id": "shadow-rose", "alias": ["srose", "ml rose", "mlrose"] },
-    { "id": "shooting-star-achates", "alias": [] },
+    {
+      "id": "shooting-star-achates",
+      "alias": ["ml achates", "mlachates", "ssachates", "ss achates"]
+    },
     { "id": "silk", "alias": [] },
     {
       "id": "sinful-angelica",
@@ -202,16 +215,19 @@
     { "id": "azalea", "alias": [] },
     { "id": "bask", "alias": [] },
     { "id": "batisse", "alias": [] },
-    { "id": "butcher-corps-inquisitor", "alias": [] },
-    { "id": "captain-rikoris", "alias": [] },
+    { "id": "butcher-corps-inquisitor", "alias": ["bci"] },
+    { "id": "captain-rikoris", "alias": ["sc rikoris", "scrikoris"] },
     { "id": "carmainerose", "alias": [] },
     { "id": "carrot", "alias": [] },
     { "id": "celeste", "alias": [] },
     { "id": "chaos-inquisitor", "alias": [] },
-    { "id": "chaos-sect-axe", "alias": [] },
+    { "id": "chaos-sect-axe", "alias": ["csa"] },
     { "id": "church-of-ilryos-axe", "alias": [] },
     { "id": "commander-lorina", "alias": ["sc lorina"] },
-    { "id": "doll-maker-pearlhorizon", "alias": [] },
+    {
+      "id": "doll-maker-pearlhorizon",
+      "alias": ["sc pearl", "sc pearlhorizon", "scpearl", "scpearlhorizon"]
+    },
     { "id": "doris", "alias": [] },
     { "id": "eaton", "alias": [] },
     { "id": "elson", "alias": [] },
@@ -237,7 +253,7 @@
     { "id": "lucy", "alias": [] },
     { "id": "magic-scholar-doris", "alias": ["sc doris"] },
     { "id": "mascot-hazel", "alias": [] },
-    { "id": "mercenary-helga", "alias": [] },
+    { "id": "mercenary-helga", "alias": ["sc helga"] },
     { "id": "mirsa", "alias": [] },
     { "id": "mistychain", "alias": [] },
     { "id": "montmorancy", "alias": [] },
