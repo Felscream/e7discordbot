@@ -5,15 +5,18 @@ import { Attribute, Role } from "../hero/model/characteristics";
 import config from "../../config.json";
 import * as resources from "../../resources/embedResources.json";
 import HeroSorter from "../hero/HeroSorter";
+import { HeroSummary } from "../hero/model/heroSummary";
 
 class HeroListMenu {
   private channel: Channel;
   private author: string;
   private menu: Menu;
+  private heroes: HeroSummary[];
 
-  constructor(channel: Channel, author: string) {
+  constructor(channel: Channel, author: string, heroes: HeroSummary[]) {
     this.channel = channel;
     this.author = author;
+    this.heroes = heroes;
   }
 
   async start(args: string[]) {
@@ -30,13 +33,7 @@ class HeroListMenu {
   }
 
   private async generatePages(args: string[]): Promise<any[]> {
-    let heroes: HeroPreview[] = [];
-    try {
-      heroes = await getHeroesList();
-    } catch (e) {
-      return [];
-    }
-    const sortedHeroes = HeroSorter.sortHeroes(heroes, args);
+    const sortedHeroes = HeroSorter.sortHeroes(this.heroes, args);
     const pagesNb = Math.ceil(sortedHeroes.length / config.heroesPerPage);
     let pages: any[] = [];
     for (let i = 0; i < pagesNb; i++) {

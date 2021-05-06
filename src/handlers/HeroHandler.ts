@@ -7,8 +7,20 @@ import findHeroId from "../hero/HeroFinder";
 import { Hero } from "../hero/model/Hero";
 
 async function displayHeroes(message: Message, args: string[]) {
-  const menu = new HeroListMenu(message.channel, message.author.id);
-  menu.start(args);
+  let heroes: HeroSummary[] = [];
+  try {
+    heroes = await getHeroesList();
+  } catch (e) {
+    heroes = [];
+  }
+  if (heroes.length > 0) {
+    const menu = new HeroListMenu(message.channel, message.author.id, heroes);
+    menu.start(args);
+  } else {
+    message.reply(
+      "An error occured while getting the list of available heroes"
+    );
+  }
 }
 
 async function displayHero(args: string[]): Promise<MessageEmbed> {

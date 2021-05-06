@@ -1,4 +1,4 @@
-import { differenceInDays, differenceInSeconds } from "date-fns";
+import { differenceInDays } from "date-fns";
 import config from "../../config.json";
 
 abstract class Cache<T, U> {
@@ -7,10 +7,10 @@ abstract class Cache<T, U> {
     this.map.set(key, new Entry(value, created));
   }
 
-  get(key: T): Entry<U> {
+  get(key: T): U {
     const entry = this.map.get(key);
     if (this.isValid(entry)) {
-      return entry;
+      return entry.value;
     }
     return undefined;
   }
@@ -24,7 +24,7 @@ abstract class Cache<T, U> {
       return true;
     }
     return (
-      differenceInSeconds(new Date(), entry.creationDate) >
+      differenceInDays(new Date(), entry.creationDate) >
       config.heroListConservation
     );
   }

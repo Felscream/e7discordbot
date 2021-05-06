@@ -14,34 +14,30 @@ const heroListCache = new HeroListCache();
 const heroCache = new HeroCache();
 
 async function getHeroesList(): Promise<HeroSummary[]> {
-  let cachedValue = heroListCache.get(heroListCacheKey);
+  let heroes = heroListCache.get(heroListCacheKey);
 
-  let heroes: HeroSummary[] = [];
-  if (cachedValue === undefined) {
+  if (heroes === undefined) {
     console.log("cache is empty");
     heroes = await getHeroes();
-    if (heroes !== null && heroes.length > 0) {
+    if (heroes !== undefined && heroes.length > 0) {
       heroListCache.put(heroListCacheKey, heroes, new Date());
     }
   } else {
     console.log("cache is not empty");
-    heroes = cachedValue.value;
   }
 
   return heroes;
 }
 
 async function getHeroById(heroId: string) {
-  let cachedValue = heroCache.get(heroId);
-  let hero: Hero = null;
-  if (cachedValue === undefined) {
+  let hero = heroCache.get(heroId);
+  if (hero === undefined) {
     hero = await getHero(heroId);
-    if (hero !== null) {
+    if (hero !== undefined) {
       heroCache.put(heroId, hero, new Date());
     }
   } else {
     console.log("Getting hero " + heroId + " from cache");
-    hero = cachedValue.value;
   }
   return hero;
 }
