@@ -31,12 +31,12 @@ class HelpMenu {
       "h|hero <hero name>",
       "Displays hero data"
     );
-    const reportDescription = new Description(
+    /*const reportDescription = new Description(
       "report <speed>|<ally1>,<ally2>,<ally3>,<team cp>|<enemy1>,<enemy2>,<enemy3>, <enemy cp>|<match result>",
       "Reports a guild war match results\n*speed* your fastest unit speed\n*Match result accepted values* : \n*VICTORY* -> w, v, win, victory, victoire\n*DRAW* -> e, draw, egalite\n*LOSS* -> l, loss, lose, defeat, defaite"
-    );
+    );*/
 
-    const commands = [heroesDescription, heroDescription, reportDescription];
+    const commands = [heroesDescription, heroDescription];
     const content = new MessageEmbed()
       .setTitle("Louis XVII Bot - Commands")
       .setDescription(this.buildHelpContent(commands));

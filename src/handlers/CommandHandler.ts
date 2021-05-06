@@ -1,4 +1,5 @@
 import { Message, TextChannel, MessageEmbed } from "discord.js";
+import config from "../../config.json";
 import displayHelp from "./HelpHandler";
 import { displayHeroes, displayHero } from "./HeroHandler";
 import handleReport from "./ReportHandler";
@@ -15,6 +16,7 @@ class CommandHandler {
       console.log("Not a command");
       return;
     }
+    const originalParameters = this.buildOriginalParameters(message);
 
     const args = message.content
       .slice(this.prefix.length)
@@ -22,6 +24,7 @@ class CommandHandler {
       .toLowerCase()
       .split(" ")
       .filter((arg) => arg.length > 0);
+
     const command = args.shift();
 
     console.log("command: ", command);
@@ -36,13 +39,29 @@ class CommandHandler {
         const embed = await displayHero(args);
         if (embed !== null) {
           message.channel.send(embed);
+        } else {
+          message.reply(
+            `Could not find hero with name '${originalParameters}'`
+          );
         }
         break;
       case "help":
         displayHelp(message, args);
         break;
       case "report":
-        handleReport(message, args);
+        if (config.environement == "dev") {
+          handleReport(message, args);
+        }
+        break;
+      case "d":
+        const exampleEmbed = new MessageEmbed()
+          .setTitle("Some title")
+          .attachFiles(["resources/art5_5_fu.png"])
+          .setImage(
+            "https://assets.epicsevendb.com/_source/item_arti/art5_5_fu.png"
+          );
+
+        message.channel.send({ embed: exampleEmbed });
         break;
       default:
         console.log("Unrecognized command");
@@ -52,6 +71,15 @@ class CommandHandler {
 
   isCommand(message: string) {
     return message.startsWith(this.prefix);
+  }
+
+  buildOriginalParameters(message: Message) {
+    let originalParameters = message.content
+      .slice(this.prefix.length)
+      .trim()
+      .split(" ");
+    originalParameters.shift();
+    return originalParameters.join(" ");
   }
 }
 
