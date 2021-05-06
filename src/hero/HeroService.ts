@@ -17,7 +17,7 @@ async function getHeroesList(): Promise<HeroSummary[]> {
   let cachedValue = heroListCache.get(heroListCacheKey);
 
   let heroes: HeroSummary[] = [];
-  if (isCacheInvalid(cachedValue)) {
+  if (cachedValue === undefined) {
     console.log("cache is empty");
     heroes = await getHeroes();
     if (heroes !== null && heroes.length > 0) {
@@ -34,7 +34,7 @@ async function getHeroesList(): Promise<HeroSummary[]> {
 async function getHeroById(heroId: string) {
   let cachedValue = heroCache.get(heroId);
   let hero: Hero = null;
-  if (isCacheInvalid(cachedValue)) {
+  if (cachedValue === undefined) {
     hero = await getHero(heroId);
     if (hero !== null) {
       heroCache.put(heroId, hero, new Date());
@@ -44,20 +44,6 @@ async function getHeroById(heroId: string) {
     hero = cachedValue.value;
   }
   return hero;
-}
-
-function isCacheInvalid(cachedValue: Entry<Hero> | Entry<HeroSummary[]>) {
-  return cachedValue === undefined || isCacheExpired(cachedValue);
-}
-
-function isCacheExpired(entry: Entry<HeroSummary[]> | Entry<Hero>): boolean {
-  if (entry === undefined) {
-    return true;
-  }
-  return (
-    differenceInDays(new Date(), entry.creationDate) >
-    config.heroListConservation
-  );
 }
 
 export { getHeroesList, getHeroById };

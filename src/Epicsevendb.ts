@@ -3,6 +3,9 @@ import axios from "axios";
 import HeroMapper from "./hero/HeroMapper";
 import { HeroSummary } from "./hero/model/heroSummary";
 import { Hero } from "./hero/model/Hero";
+import { mapArtifactSummary } from "./artifact/ArtifactMapper";
+import ArtifactSummary from "./artifact/model/ArtifactSummary";
+
 async function getHeroes(): Promise<HeroSummary[]> {
   let response = null;
   try {
@@ -42,4 +45,23 @@ async function getHero(id: string): Promise<Hero> {
   throw error;
 }
 
-export { getHeroes, getHero };
+async function getArtifacts(): Promise<ArtifactSummary[]> {
+  let response = null;
+  try {
+    response = await axios.get(config.artifactsUrl);
+  } catch (exception) {
+    process.stderr.write(
+      `ERROR received from ${config.artifactsUrl}: ${exception}\n`
+    );
+    const error = new Error("Error getting list of available artifacts");
+    throw error;
+  }
+
+  const artifacts: ArtifactSummary[] = [];
+  for (let artifact in response.data.results) {
+    artifacts.push(mapArtifactSummary(response.data.results[artifact]));
+  }
+  return artifacts;
+}
+
+export { getHeroes, getHero, getArtifacts };

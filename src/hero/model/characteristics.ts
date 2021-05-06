@@ -13,6 +13,7 @@ enum Role {
   RANGER = "ranger",
   MAGE = "mage",
   SOUL_WEAVER = "soul weaver",
+  NONE = "none",
 }
 
 enum Zodiac {

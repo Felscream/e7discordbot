@@ -162,9 +162,10 @@ class HeroMapper {
         return Role.RANGER;
       case "mage":
         return Role.MAGE;
-      default:
       case "manauser":
         return Role.SOUL_WEAVER;
+      default:
+        return Role.NONE;
     }
   }
 

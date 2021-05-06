@@ -53,15 +53,19 @@ class CommandHandler {
           handleReport(message, args);
         }
         break;
+      case "artifacts":
+        break;
       case "d":
-        const exampleEmbed = new MessageEmbed()
-          .setTitle("Some title")
-          .attachFiles(["resources/art5_5_fu.png"])
-          .setImage(
-            "https://assets.epicsevendb.com/_source/item_arti/art5_5_fu.png"
-          );
+        if (config.environement == "dev") {
+          const exampleEmbed = new MessageEmbed()
+            .setTitle("Some title")
+            .attachFiles(["resources/art5_5_fu.png"])
+            .setImage(
+              "https://assets.epicsevendb.com/_source/item_arti/art5_5_fu.png"
+            );
 
-        message.channel.send({ embed: exampleEmbed });
+          message.channel.send({ embed: exampleEmbed });
+        }
         break;
       default:
         console.log("Unrecognized command");
