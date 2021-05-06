@@ -1,6 +1,7 @@
+import Summary from "../../utility/Summary";
 import { Attribute, Role, Zodiac } from "./characteristics";
 
-class HeroSummary {
+class HeroSummary implements Summary {
   id: string;
   name: string;
   isMoonlight: boolean;
@@ -19,6 +20,15 @@ class HeroSummary {
     this.zodiac = builder.zodiac;
     this.role = builder.role;
     this.icon = builder.icon;
+  }
+  getName(): string {
+    return this.name;
+  }
+  getRarity(): number {
+    return this.rarity;
+  }
+  getRole(): Role {
+    return this.role;
   }
 }
 

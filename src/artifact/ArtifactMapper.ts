@@ -6,7 +6,8 @@ function mapArtifactSummary(artifact: any): ArtifactSummary {
     .withId(artifact.id)
     .withName(artifact.name)
     .withRarity(artifact.rarity)
-    .withRole(mapRole(artifact.role));
+    .withRole(mapRole(artifact.role))
+    .build();
 }
 
 function mapRole(role: any): Role {

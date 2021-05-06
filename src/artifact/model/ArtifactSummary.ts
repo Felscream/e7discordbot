@@ -1,6 +1,7 @@
+import Summary from "../../utility/Summary";
 import { Role } from "../../hero/model/characteristics";
 
-class ArtifactSummary {
+class ArtifactSummary implements Summary {
   id: string;
   name: string;
   role: Role;
@@ -11,6 +12,15 @@ class ArtifactSummary {
     this.name = builder.name;
     this.role = builder.role;
     this.rarity = builder.rarity;
+  }
+  getName(): string {
+    return this.name;
+  }
+  getRarity(): number {
+    return this.rarity;
+  }
+  getRole(): Role {
+    return this.role;
   }
 
   static start() {

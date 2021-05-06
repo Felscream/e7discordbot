@@ -2,6 +2,7 @@ import { Message, TextChannel, MessageEmbed } from "discord.js";
 import config from "../../config.json";
 import displayHelp from "./HelpHandler";
 import { displayHeroes, displayHero } from "./HeroHandler";
+import { displayArtifacts } from "./ArtifactHandler";
 import handleReport from "./ReportHandler";
 
 class CommandHandler {
@@ -54,6 +55,7 @@ class CommandHandler {
         }
         break;
       case "artifacts":
+        displayArtifacts(message, args);
         break;
       case "d":
         if (config.environement == "dev") {

@@ -1,33 +1,30 @@
-import { HeroPreview } from "../menus/HeroListMenu";
-const sortAlphabetically = function (a: HeroPreview, b: HeroPreview): number {
-  if (a.name > b.name) {
+import Summary from "../utility/Summary";
+const sortAlphabetically = function (a: Summary, b: Summary): number {
+  if (a.getName() > b.getName()) {
     return 1;
   }
 
-  if (a.name < b.name) {
+  if (a.getName() < b.getName()) {
     return -1;
   }
 
   return 0;
 };
 
-const sortByRarity = function (a: HeroPreview, b: HeroPreview): number {
-  return Math.sign(b.rarity - a.rarity);
+const sortByRarity = function (a: Summary, b: Summary): number {
+  return Math.sign(b.getRarity() - a.getRarity());
 };
 
-class HeroSorter {
-  public static sortHeroes(
-    hero: HeroPreview[],
-    sortKey: string[]
-  ): HeroPreview[] {
+class SummarySorter {
+  public static sortHeroes(summary: Summary[], sortKey: string[]): Summary[] {
     switch (sortKey[0]) {
       case "a":
-        return hero.sort(sortAlphabetically);
+        return summary.sort(sortAlphabetically);
       case "s":
       default:
-        return hero.sort(sortByRarity);
+        return summary.sort(sortByRarity);
     }
   }
 }
 
-export default HeroSorter;
+export default SummarySorter;

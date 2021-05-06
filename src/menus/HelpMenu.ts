@@ -23,6 +23,14 @@ class HelpMenu {
   }
 
   private generateHelpMenu(): any[] {
+    const modules = [this.generateHeroModule(), this.generateArtifactModule()];
+    modules.forEach((module, index) =>
+      module.content.setFooter(`${index + 1}/${modules.length}`)
+    );
+    return modules;
+  }
+
+  private generateHeroModule(): Module {
     const heroesDescription = new Description(
       "heroes",
       "Lists available heroes"
@@ -31,17 +39,40 @@ class HelpMenu {
       "h|hero <hero name>",
       "Displays hero data"
     );
-    /*const reportDescription = new Description(
-      "report <speed>|<ally1>,<ally2>,<ally3>,<team cp>|<enemy1>,<enemy2>,<enemy3>, <enemy cp>|<match result>",
-      "Reports a guild war match results\n*speed* your fastest unit speed\n*Match result accepted values* : \n*VICTORY* -> w, v, win, victory, victoire\n*DRAW* -> e, draw, egalite\n*LOSS* -> l, loss, lose, defeat, defaite"
-    );*/
 
     const commands = [heroesDescription, heroDescription];
     const content = new MessageEmbed()
-      .setTitle("Louis XVII Bot - Commands")
+      .setTitle("Louis XVII Bot - Commands - Hero Module")
       .setDescription(this.buildHelpContent(commands));
 
-    return [{ name: "help", content: content, reactions: {} }];
+    const reactions = {
+      "⏮": "first",
+      "⏪": "previous",
+      "⏩": "next",
+      "⏭": "last",
+    };
+    return new Module("hero", content, reactions);
+  }
+
+  private generateArtifactModule(): Module {
+    const artifactsDescription = new Description(
+      "artifacts",
+      "Lists available artifacts"
+    );
+
+    const commands = [artifactsDescription];
+    const content = new MessageEmbed()
+      .setTitle("Louis XVII Bot - Commands - Artifact Module")
+      .setDescription(this.buildHelpContent(commands));
+
+    const reactions = {
+      "⏮": "first",
+      "⏪": "previous",
+      "⏩": "next",
+      "⏭": "last",
+    };
+
+    return new Module("artifact", content, reactions);
   }
 
   private buildHelpContent(descriptions: Description[]) {
@@ -59,6 +90,17 @@ class Description {
   constructor(command: string, description: string) {
     this.command = command;
     this.description = description;
+  }
+}
+
+class Module {
+  name: string;
+  content: MessageEmbed;
+  reactions: any;
+  constructor(name: string, content: MessageEmbed, reactions: any) {
+    this.name = name;
+    this.content = content;
+    this.reactions = reactions;
   }
 }
 

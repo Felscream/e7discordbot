@@ -6,17 +6,25 @@ import config from "../../config.json";
 import * as resources from "../../resources/embedResources.json";
 import HeroSorter from "../hero/HeroSorter";
 import { HeroSummary } from "../hero/model/heroSummary";
+import Summary from "../utility/Summary";
 
-class HeroListMenu {
+class SummaryMenu {
   private channel: Channel;
   private author: string;
   private menu: Menu;
-  private heroes: HeroSummary[];
+  private summary: Summary[];
+  private title: string;
 
-  constructor(channel: Channel, author: string, heroes: HeroSummary[]) {
+  constructor(
+    channel: Channel,
+    author: string,
+    summary: Summary[],
+    title: string
+  ) {
     this.channel = channel;
     this.author = author;
-    this.heroes = heroes;
+    this.summary = summary;
+    this.title = title;
   }
 
   async start(args: string[]) {
@@ -33,25 +41,25 @@ class HeroListMenu {
   }
 
   private async generatePages(args: string[]): Promise<any[]> {
-    const sortedHeroes = HeroSorter.sortHeroes(this.heroes, args);
-    const pagesNb = Math.ceil(sortedHeroes.length / config.heroesPerPage);
+    const sortedSummary = HeroSorter.sortHeroes(this.summary, args);
+    const pagesNb = Math.ceil(sortedSummary.length / config.heroesPerPage);
     let pages: any[] = [];
     for (let i = 0; i < pagesNb; i++) {
       const startIndex = i * config.heroesPerPage;
       const endIndex = Math.min(
         startIndex + config.heroesPerPage,
-        sortedHeroes.length
+        sortedSummary.length
       );
       const content = new MessageEmbed()
-        .setTitle("Hero list")
+        .setTitle(this.title)
         .setDescription(
-          HeroListMenu.generatePageContent(
-            sortedHeroes.slice(startIndex, endIndex),
+          SummaryMenu.generatePageContent(
+            sortedSummary.slice(startIndex, endIndex),
             startIndex + 1
           )
         )
         .setFooter(
-          HeroListMenu.buildFooter(i + 1, pagesNb, sortedHeroes.length)
+          SummaryMenu.buildFooter(i + 1, pagesNb, sortedSummary.length)
         );
       const page = {
         name: `${i}`,
@@ -69,16 +77,17 @@ class HeroListMenu {
   }
 
   private static generatePageContent(
-    heroes: HeroPreview[],
+    summaries: Summary[],
     startIndex: number
   ): string {
-    return heroes
-      .map((hero, index) => {
+    return summaries
+      .map((summary, index) => {
         let display = `**${startIndex + index}.** [`;
-        for (let i = 0; i < hero.rarity; i++) {
+        for (let i = 0; i < summary.getRarity(); i++) {
           display += "\u2605";
         }
-        display += "]" + resources.roleEmoji[hero.role] + hero.name;
+        display +=
+          "]" + resources.roleEmoji[summary.getRole()] + summary.getName();
 
         return display;
       })
@@ -94,17 +103,4 @@ class HeroListMenu {
   }
 }
 
-class HeroPreview {
-  name: string;
-  attribute: Attribute;
-  rarity: number;
-  role: Role;
-  constructor(name: string, attribute: Attribute, rarity: number, role: Role) {
-    this.name = name;
-    this.attribute = attribute;
-    this.rarity = rarity;
-    this.role = role;
-  }
-}
-
-export { HeroListMenu, HeroPreview };
+export { SummaryMenu };

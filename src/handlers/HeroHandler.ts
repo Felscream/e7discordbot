@@ -1,6 +1,6 @@
 import { Message, MessageEmbed } from "discord.js";
 import createHeroEmbed from "../embeds/HeroEmbed";
-import { HeroListMenu } from "../menus/HeroListMenu";
+import { SummaryMenu } from "../menus/SummaryMenu";
 import { getHeroesList, getHeroById } from "../hero/HeroService";
 import { HeroSummary } from "../hero/model/heroSummary";
 import findHeroId from "../hero/HeroFinder";
@@ -14,7 +14,12 @@ async function displayHeroes(message: Message, args: string[]) {
     heroes = [];
   }
   if (heroes.length > 0) {
-    const menu = new HeroListMenu(message.channel, message.author.id, heroes);
+    const menu = new SummaryMenu(
+      message.channel,
+      message.author.id,
+      heroes,
+      "Hero list"
+    );
     menu.start(args);
   } else {
     message.reply(
