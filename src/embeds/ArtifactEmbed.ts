@@ -7,7 +7,8 @@ function createArtifactEmbed(artifact: Artifact, level: number): MessageEmbed {
     .setTitle(buildTitle(artifact, level))
     .setURL(artifact.url)
     .setDescription(artifact.getDescription(level))
-    .setImage(artifact.image);
+    .setThumbnail(artifact.icon)
+    .setImage(artifact.thumbnail);
 }
 
 function buildTitle(artifact: Artifact, level: number): string {
