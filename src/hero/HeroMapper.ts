@@ -10,6 +10,7 @@ import {
 import { Hero, HeroBuilder } from "./model/Hero";
 import { HeroSummary, HeroSummaryBuilder } from "./model/heroSummary";
 import config from "../../config.json";
+import Skill from "./skills/model/Skill";
 
 class HeroMapper {
   static mapHeroSummary(hero: any): HeroSummary {
@@ -42,7 +43,24 @@ class HeroMapper {
         HeroMapper.mapStats(hero.calculatedStatus.lv60SixStarFullyAwakened)
       )
       .withEpicSevenDb(config.epicsevendbhero + hero._id)
+      .withSkills(HeroMapper.mapSkills(hero.skills))
       .create();
+  }
+
+  private static mapSkills(skills: any[]): Skill[] {
+    return skills.map(
+      (skill) =>
+        new Skill(
+          skill.name,
+          skill.enhanced_description !== undefined
+            ? skill.enhanced_description
+            : skill.description,
+          skill.values,
+          skill.cooldown,
+          skill.enhancements.map((e: any) => e.string),
+          skill.assets.icon
+        )
+    );
   }
 
   private static mapAttribute(attribute: any): Attribute {

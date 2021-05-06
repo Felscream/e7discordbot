@@ -101,8 +101,7 @@ function buildImprintGrade(devotion: Devotion): string {
 function formatDevotionGradeValue(
   isPercentage: boolean,
   grade: DevotionGrades
-) {
-  let value = "0";
+): string {
   if (isPercentage) {
     if (grade.value < 1) {
       return grade.value.toPrecision(1);

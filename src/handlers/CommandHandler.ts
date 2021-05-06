@@ -37,14 +37,7 @@ class CommandHandler {
         break;
       case "h":
       case "hero":
-        const embed = await displayHero(args);
-        if (embed !== null) {
-          message.channel.send(embed);
-        } else {
-          message.reply(
-            `Could not find hero with name '${originalParameters}'`
-          );
-        }
+        displayHero(message, args);
         break;
       case "help":
         displayHelp(message, args);

@@ -33,11 +33,11 @@ class HelpMenu {
   private generateHeroModule(): Module {
     const heroesDescription = new Description(
       "heroes",
-      "Lists available heroes"
+      "Lists available heroes. "
     );
     const heroDescription = new Description(
       "h|hero <hero name>",
-      "Displays hero data"
+      "Displays hero data. You can navigate to a hero's skills from there."
     );
 
     const commands = [heroesDescription, heroDescription];

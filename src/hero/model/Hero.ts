@@ -1,3 +1,4 @@
+import Skill from "../skills/model/Skill";
 import {
   Attribute,
   Devotion,
@@ -18,6 +19,7 @@ class Hero {
   lvl50Stats: HeroStats;
   lvl60Stats: HeroStats;
   epicsevendb: string;
+  skills: Skill[];
 
   constructor(builder: HeroBuilder) {
     this.name = builder.name;
@@ -31,6 +33,7 @@ class Hero {
     this.lvl50Stats = builder.lvl50Stats;
     this.lvl60Stats = builder.lvl60Stats;
     this.epicsevendb = builder.epicsevendb;
+    this.skills = builder.skills;
   }
 }
 
@@ -46,6 +49,7 @@ class HeroBuilder {
   lvl50Stats: HeroStats;
   lvl60Stats: HeroStats;
   epicsevendb: string;
+  skills: Skill[];
 
   constructor() {}
 
@@ -101,6 +105,11 @@ class HeroBuilder {
 
   withEpicSevenDb(url: string) {
     this.epicsevendb = url;
+    return this;
+  }
+
+  withSkills(skills: Skill[]) {
+    this.skills = skills;
     return this;
   }
 
