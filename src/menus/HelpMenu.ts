@@ -60,7 +60,12 @@ class HelpMenu {
       "Lists available artifacts"
     );
 
-    const commands = [artifactsDescription];
+    const artifactDescription = new Description(
+      "a|artifact",
+      "Displays artifact data. You can navigate through the artefact's enhancements."
+    );
+
+    const commands = [artifactsDescription, artifactDescription];
     const content = new MessageEmbed()
       .setTitle("Louis XVII Bot - Commands - Artifact Module")
       .setDescription(this.buildHelpContent(commands));
