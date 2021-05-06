@@ -1,12 +1,29 @@
 import { Role } from "../hero/model/characteristics";
+import Artifact from "./model/Artifact";
 import ArtifactSummary from "./model/ArtifactSummary";
+import config from "../../config.json";
 
 function mapArtifactSummary(artifact: any): ArtifactSummary {
   return ArtifactSummary.start()
-    .withId(artifact.id)
+    .withId(artifact._id)
     .withName(artifact.name)
     .withRarity(artifact.rarity)
     .withRole(mapRole(artifact.role))
+    .build();
+}
+
+function mapArtifact(artifact: any): Artifact {
+  return Artifact.start()
+    .withId(artifact._id)
+    .withName(artifact.name)
+    .withRarity(artifact.rarity)
+    .withRole(mapRole(artifact.role))
+    .withDescription(artifact.skill.description)
+    .withEnhancements(artifact.skill.enhancements)
+    .withIcon(artifact.assets.icon)
+    .withImage(artifact.assets.image)
+    .withThumbnail(artifact.assets.thumbnail)
+    .withUrl(config.epicsevendbartifact + artifact._id)
     .build();
 }
 
@@ -29,4 +46,4 @@ function mapRole(role: any): Role {
   }
 }
 
-export { mapArtifactSummary };
+export { mapArtifact, mapArtifactSummary };

@@ -1,7 +1,7 @@
 import { Message } from "discord.js";
 import Config from "../../config.json";
 import GuildWarsReport from "../reports/model/GuildWarsReport";
-import findHeroId from "../hero/HeroFinder";
+import findId from "../utility/IdentifiedFinder";
 import { getHeroesList } from "../hero/HeroService";
 import { HeroSummary } from "../hero/model/heroSummary";
 import { sendGuildWarsReport } from "../utility/MongoConnector";
@@ -95,7 +95,7 @@ async function getTeamsCompositionAndPower(
     }
 
     const teamId = team.map((unit) => {
-      let heroId = findHeroId(unit, heroes);
+      let heroId = findId(unit, heroes);
       if (heroId.length === 0) {
         return unit;
       }

@@ -26,7 +26,7 @@ class HeroMapper {
       .build();
   }
 
-  static async mapHero(hero: any): Promise<Hero> {
+  static mapHero(hero: any): Hero {
     return new HeroBuilder()
       .withName(hero.name)
       .withRarity(hero.rarity)

@@ -1,18 +1,18 @@
 import { Message, MessageEmbed } from "discord.js";
-import createHeroEmbed from "../embeds/HeroEmbed";
 import { SummaryMenu } from "../menus/SummaryMenu";
 import { getHeroesList, getHeroById } from "../hero/HeroService";
 import { HeroSummary } from "../hero/model/heroSummary";
-import findHeroId from "../hero/HeroFinder";
+import findId from "../utility/IdentifiedFinder";
 import { Hero } from "../hero/model/Hero";
-import { Menu } from "discord.js-menu";
 import HeroMenu from "../menus/HeroMenu";
+import HeroAliases from "../../resources/unitAliases.json";
 
 async function displayHeroes(message: Message, args: string[]) {
   let heroes: HeroSummary[] = [];
   try {
     heroes = await getHeroesList();
   } catch (e) {
+    console.log(e);
     heroes = [];
   }
   if (heroes.length > 0) {
@@ -32,20 +32,21 @@ async function displayHeroes(message: Message, args: string[]) {
 
 async function displayHero(message: Message, args: string[]): Promise<any> {
   let heroes: HeroSummary[] = [];
+  const heroName = args.join(" ");
   try {
     heroes = await getHeroesList();
   } catch (e) {
-    message.reply(`Could not find hero with name '${args.join(" ")}'`);
+    console.log(e);
+    message.reply(`Could not find hero with name '${heroName}'`);
     return;
   }
-  const heroName = args.join(" ");
 
-  let heroId = findHeroId(heroName, heroes);
+  const heroId = findId(heroName, heroes, HeroAliases.aliases);
 
   if (heroId.length === 0) {
-    console.log("No result for search request '" + args.join(" ") + "'");
-    message.reply(`Could not find hero with name '${args.join(" ")}'`);
-    return null;
+    console.log("No result for search request '" + heroName + "'");
+    message.reply(`Could not find hero with name '${heroName}'`);
+    return;
   }
 
   let hero: Hero;
@@ -53,15 +54,16 @@ async function displayHero(message: Message, args: string[]): Promise<any> {
     process.stdout.write(`Looking for hero with id '${heroId}'\n`);
     hero = await getHeroById(heroId);
   } catch (e) {
-    console.log("No result for search request '" + args.join(" ") + "'");
-    message.reply(`Could not find hero with name '${args.join(" ")}'`);
-    return null;
+    console.log(e);
+    console.log("No result for search request '" + heroName + "'");
+    message.reply(`Could not find hero with name '${heroName}'`);
+    return;
   }
 
-  if (hero === null) {
-    console.log("No result for search request '" + args.join(" ") + "'");
-    message.reply(`Could not find hero with name '${args.join(" ")}'`);
-    return null;
+  if (hero === undefined) {
+    console.log("No result for search request '" + heroName + "'");
+    message.reply(`Could not find hero with name '${heroName}'`);
+    return;
   }
 
   const menu = new HeroMenu(message.channel, message.author.id, hero);

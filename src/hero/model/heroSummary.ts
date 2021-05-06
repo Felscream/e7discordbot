@@ -1,7 +1,8 @@
+import Identified from "src/utility/Identified";
 import Summary from "../../utility/Summary";
 import { Attribute, Role, Zodiac } from "./characteristics";
 
-class HeroSummary implements Summary {
+class HeroSummary implements Summary, Identified {
   id: string;
   name: string;
   isMoonlight: boolean;
@@ -29,6 +30,10 @@ class HeroSummary implements Summary {
   }
   getRole(): Role {
     return this.role;
+  }
+
+  getId(): string {
+    return this.id;
   }
 }
 

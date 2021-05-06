@@ -2,7 +2,7 @@ import { Message, TextChannel, MessageEmbed } from "discord.js";
 import config from "../../config.json";
 import displayHelp from "./HelpHandler";
 import { displayHeroes, displayHero } from "./HeroHandler";
-import { displayArtifacts } from "./ArtifactHandler";
+import { displayArtifact, displayArtifacts } from "./ArtifactHandler";
 import handleReport from "./ReportHandler";
 
 class CommandHandler {
@@ -43,15 +43,19 @@ class CommandHandler {
         displayHelp(message, args);
         break;
       case "report":
-        if (config.environement == "dev") {
+        if (config.environment == "dev") {
           handleReport(message, args);
         }
         break;
       case "artifacts":
         displayArtifacts(message, args);
         break;
+      case "a":
+      case "artifact":
+        displayArtifact(message, args);
+        break;
       case "d":
-        if (config.environement == "dev") {
+        if (config.environment == "dev") {
           const exampleEmbed = new MessageEmbed()
             .setTitle("Some title")
             .attachFiles(["resources/art5_5_fu.png"])

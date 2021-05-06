@@ -21,7 +21,7 @@ class HeroMenu {
     this.hero = hero;
   }
 
-  async start() {
+  start() {
     this.menu = new Menu(
       this.channel,
       this.author,
