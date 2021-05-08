@@ -38,7 +38,7 @@ async function displayArtifact(message: Message, args: string[]): Promise<any> {
     artifacts = await getArtifactList();
   } catch (e) {
     console.log(e);
-    message.reply(`Could not find artifact with name '${artifactName}'`);
+    message.reply(`Could not find any artifact named '${artifactName}'`);
     return;
   }
 
@@ -46,7 +46,7 @@ async function displayArtifact(message: Message, args: string[]): Promise<any> {
 
   if (artifactId.length === 0) {
     console.log("No result for search request '" + artifactName + "'");
-    message.reply(`Could not find artifact with name '${artifactName}'`);
+    message.reply(`Could not find any artifact named '${artifactName}'`);
     return null;
   }
 
@@ -57,13 +57,13 @@ async function displayArtifact(message: Message, args: string[]): Promise<any> {
   } catch (e) {
     console.log(e);
     console.log("No result for search request '" + artifactName + "'");
-    message.reply(`Could not find hero with name '${artifactName}'`);
+    message.reply(`Could not find any artifact named '${artifactName}'`);
     return;
   }
 
   if (artifact === undefined) {
     console.log("No result for search request '" + artifactName + "'");
-    message.reply(`Could not find hero with name '${artifactName}'`);
+    message.reply(`Could not find any artifact named '${artifactName}'`);
     return;
   }
 

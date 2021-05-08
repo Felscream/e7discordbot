@@ -37,7 +37,7 @@ async function displayHero(message: Message, args: string[]): Promise<any> {
     heroes = await getHeroesList();
   } catch (e) {
     console.log(e);
-    message.reply(`Could not find hero with name '${heroName}'`);
+    message.reply(`Could not find any hero named '${heroName}'`);
     return;
   }
 
@@ -45,7 +45,7 @@ async function displayHero(message: Message, args: string[]): Promise<any> {
 
   if (heroId.length === 0) {
     console.log("No result for search request '" + heroName + "'");
-    message.reply(`Could not find hero with name '${heroName}'`);
+    message.reply(`Could not find any hero named '${heroName}'`);
     return;
   }
 
@@ -56,13 +56,13 @@ async function displayHero(message: Message, args: string[]): Promise<any> {
   } catch (e) {
     console.log(e);
     console.log("No result for search request '" + heroName + "'");
-    message.reply(`Could not find hero with name '${heroName}'`);
+    message.reply(`Could not find any hero named '${heroName}'`);
     return;
   }
 
   if (hero === undefined) {
     console.log("No result for search request '" + heroName + "'");
-    message.reply(`Could not find hero with name '${heroName}'`);
+    message.reply(`Could not find any hero named '${heroName}'`);
     return;
   }
 
