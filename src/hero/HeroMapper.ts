@@ -10,7 +10,7 @@ import {
 import { Hero, HeroBuilder } from "./model/Hero";
 import { HeroSummary, HeroSummaryBuilder } from "./model/heroSummary";
 import config from "../../config.json";
-import Skill from "./skills/model/Skill";
+import { Skill, Soulburn } from "./skills/model/Skill";
 
 class HeroMapper {
   static mapHeroSummary(hero: any): HeroSummary {
@@ -58,6 +58,7 @@ class HeroMapper {
           skill.values,
           skill.cooldown,
           skill.enhancements.map((e: any) => e.string),
+          new Soulburn(skill.soul_requirement, skill.soul_description),
           skill.assets.icon
         )
     );

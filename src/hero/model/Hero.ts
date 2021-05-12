@@ -1,4 +1,4 @@
-import Skill from "../skills/model/Skill";
+import { Skill } from "../skills/model/Skill";
 import {
   Attribute,
   Devotion,

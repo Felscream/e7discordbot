@@ -8,6 +8,7 @@ class Skill {
   variables: number[];
   cooldown: number;
   enhancements: string[];
+  soulburn: Soulburn;
   icon: string;
 
   constructor(
@@ -16,6 +17,7 @@ class Skill {
     variables: number[],
     cooldown: number,
     enhancements: string[],
+    soulburn: Soulburn,
     icon: string
   ) {
     this.name = name;
@@ -23,6 +25,7 @@ class Skill {
     this.variables = variables;
     this.cooldown = cooldown;
     this.enhancements = enhancements;
+    this.soulburn = soulburn;
     this.icon = icon;
   }
 
@@ -54,4 +57,13 @@ class Skill {
   }
 }
 
-export default Skill;
+class Soulburn {
+  cost: number;
+  description: string;
+  constructor(cost: number, description: string) {
+    this.cost = cost;
+    this.description = description;
+  }
+}
+
+export { Skill, Soulburn };

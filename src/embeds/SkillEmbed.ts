@@ -1,6 +1,6 @@
 import { EmbedFieldData, MessageEmbed } from "discord.js";
 import { Hero } from "src/hero/model/Hero";
-import Skill from "../hero/skills/model/Skill";
+import { Skill } from "../hero/skills/model/Skill";
 import resources from "../../resources/embedResources.json";
 
 function createSkillEmbed(hero: Hero, index: number): MessageEmbed {
@@ -9,7 +9,7 @@ function createSkillEmbed(hero: Hero, index: number): MessageEmbed {
     .setTitle(buildTitle(skill, hero))
     .setColor(resources.attributeColor[hero.attribute])
     .setThumbnail(skill.icon)
-    .setDescription(skill.getDescription())
+    .setDescription(buildDescription(skill))
     .addFields(createEnhancementFields(skill));
   return message;
 }
@@ -21,6 +21,20 @@ function buildTitle(skill: Skill, hero: Hero): string {
     ? `${resources.cooldown} ${skill.cooldown} ${turn}`
     : "";
   return `${hero.name} - ${skill.name} ${cooldown}`;
+}
+
+function buildDescription(skill: Skill): string {
+  let soulburnDescription = "";
+  console.log(skill);
+  if (skill.soulburn.description && skill.soulburn.cost) {
+    soulburnDescription = `\n\n**Soulburn**: consumes ${skill.soulburn.cost} souls`;
+    for (let i = 0; i < skill.soulburn.cost / 10; i++) {
+      soulburnDescription += resources.soul;
+    }
+    soulburnDescription += `\n${skill.soulburn.description}`;
+  }
+
+  return skill.getDescription() + soulburnDescription;
 }
 
 function createEnhancementFields(skill: Skill): EmbedFieldData[] {
