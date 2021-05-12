@@ -8,6 +8,7 @@ class Skill {
   variables: number[];
   cooldown: number;
   enhancements: string[];
+  soulgain: number;
   soulburn: Soulburn;
   icon: string;
 
@@ -18,6 +19,7 @@ class Skill {
     cooldown: number,
     enhancements: string[],
     soulburn: Soulburn,
+    soulgain: number,
     icon: string
   ) {
     this.name = name;
@@ -26,6 +28,7 @@ class Skill {
     this.cooldown = cooldown;
     this.enhancements = enhancements;
     this.soulburn = soulburn;
+    this.soulgain = soulgain;
     this.icon = icon;
   }
 
@@ -35,6 +38,12 @@ class Skill {
       const suffix = this.variables[i] < 1 ? "%" : "";
       const value = this.getVariableFormatedValue(this.variables[i]);
       formated = formated.replace(marker, `**${value}${suffix}**`);
+    }
+    if (this.soulgain) {
+      formated += `\nAcquire ${this.soulgain} soul`;
+      if (this.soulgain > 1) {
+        formated += "s";
+      }
     }
     return formated;
   }

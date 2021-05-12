@@ -59,6 +59,7 @@ class HeroMapper {
           skill.cooldown,
           skill.enhancements.map((e: any) => e.string),
           new Soulburn(skill.soul_requirement, skill.soul_description),
+          skill.soul_gain,
           skill.assets.icon
         )
     );

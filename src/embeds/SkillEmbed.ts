@@ -17,20 +17,21 @@ function createSkillEmbed(hero: Hero, index: number): MessageEmbed {
 function buildTitle(skill: Skill, hero: Hero): string {
   const hasCooldown = skill.cooldown > 0;
   const turn = skill.cooldown > 1 ? "turns" : "turn";
+
   const cooldown = hasCooldown
     ? `${resources.cooldown} ${skill.cooldown} ${turn}`
     : "";
-  return `${hero.name} - ${skill.name} ${cooldown}`;
+  let souls = "";
+  for (let i = 0; i < skill.soulburn.cost / 10; i++) {
+    souls += resources.soul;
+  }
+  return `${hero.name} - ${skill.name} ${cooldown} ${souls}`;
 }
 
 function buildDescription(skill: Skill): string {
   let soulburnDescription = "";
-  console.log(skill);
   if (skill.soulburn.description && skill.soulburn.cost) {
     soulburnDescription = `\n\n**Soulburn**: consumes ${skill.soulburn.cost} souls`;
-    for (let i = 0; i < skill.soulburn.cost / 10; i++) {
-      soulburnDescription += resources.soul;
-    }
     soulburnDescription += `\n${skill.soulburn.description}`;
   }
 
