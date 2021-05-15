@@ -4,6 +4,7 @@ import displayHelp from "./HelpHandler";
 import { displayHeroes, displayHero } from "./HeroHandler";
 import { displayArtifact, displayArtifacts } from "./ArtifactHandler";
 import handleReport from "./ReportHandler";
+import handleUtility from "./UtilsHandler";
 
 class CommandHandler {
   private prefix: string;
@@ -56,14 +57,7 @@ class CommandHandler {
         break;
       case "d":
         if (config.environment == "dev") {
-          const exampleEmbed = new MessageEmbed()
-            .setTitle("Some title")
-            .attachFiles(["resources/art5_5_fu.png"])
-            .setImage(
-              "https://assets.epicsevendb.com/_source/item_arti/art5_5_fu.png"
-            );
-
-          message.channel.send({ embed: exampleEmbed });
+          handleUtility(args);
         }
         break;
       default:

@@ -13,10 +13,12 @@ const heroListCacheKey = "H";
 const heroListCache = new HeroListCache();
 const heroCache = new HeroCache();
 
-async function getHeroesList(): Promise<HeroSummary[]> {
+async function getHeroesList(
+  updateCache: boolean = false
+): Promise<HeroSummary[]> {
   let heroes = heroListCache.get(heroListCacheKey);
 
-  if (heroes === undefined) {
+  if (heroes === undefined || updateCache) {
     console.log("cache is empty");
     heroes = await getHeroes();
     if (heroes !== undefined && heroes.length > 0) {
